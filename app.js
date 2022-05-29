@@ -27,6 +27,39 @@ new Mongoose.Schema({
 )
 Mongoose.connect("mongodb+srv://sruthybabu:sruthy4599@cluster0.bip6a.mongodb.net/busDb")
 
+app.post("/api/delete",(req,res)=>{
+    var getId=req.body
+    busModel.findByIdAndRemove(getId,
+        (error,data)=>{
+            if(error)
+            {
+                res.send({"status":error})
+            }
+            else
+            {
+                res.send({"status":"success"})
+            }
+
+        })
+})
+
+app.post("/api/search",(req,res)=>{
+    var getRoute=req.body
+    busModel.find(getRoute,
+        (error,data)=>{
+            if(error)
+            {
+                res.send({"status":error})
+            }
+            else
+            {
+                res.send(data)
+            }
+
+    })
+
+})
+
 
 
 app.post("/api/busadd",(req,res)=>{
